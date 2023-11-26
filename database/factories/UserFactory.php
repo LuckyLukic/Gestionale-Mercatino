@@ -22,14 +22,23 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+
+
     public function definition(): array
     {
+
+        $addressId = Address::inRandomOrder()->value('id');
+
         return [
             'name' => fake()->name(),
+            'surname' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'address_id' => $addressId
+            ,
         ];
     }
 
@@ -40,8 +49,8 @@ class UserFactory extends Factory
             $numItems = rand(2, 5);
             ItemFactory::new()->count($numItems)->create(['user_id' => $user->id]);
 
-            // Create 1 address for the user
-            AddressFactory::new()->create(['user_id' => $user->id]);
+
+
         });
     }
 

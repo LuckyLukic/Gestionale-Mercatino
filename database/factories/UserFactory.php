@@ -2,9 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Item;
+use App\Models\User;
+use App\Models\Address;
 use Illuminate\Support\Str;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -27,6 +31,18 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            // Create 2 to 5 random items for the user
+            $numItems = rand(2, 5);
+            ItemFactory::new()->count($numItems)->create(['user_id' => $user->id]);
+
+            // Create 1 address for the user
+            AddressFactory::new()->create(['user_id' => $user->id]);
+        });
     }
 
     /**

@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->string('province');
             $table->string('postalcode');
             $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

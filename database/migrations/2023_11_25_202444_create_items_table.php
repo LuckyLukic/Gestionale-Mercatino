@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->enum('category', CategoryEnum::values());
+            $table->integer('quantity');
             $table->decimal('price', 9, 2);
             $table->string('description');
             $table->timestamps();

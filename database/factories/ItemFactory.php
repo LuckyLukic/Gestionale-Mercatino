@@ -20,6 +20,7 @@ class ItemFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'category' => $this->faker->randomElement(CategoryEnum::values()),
+            'quantity' => $this->faker->numberBetween(1, 10),
             'price' => $this->faker->randomFloat(2, 10, 100),
             'description' => $this->faker->text(120),
         ];

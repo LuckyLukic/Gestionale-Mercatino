@@ -15,8 +15,8 @@ class CreateUser extends Component
     public $address, $city, $province, $postalcode;
 
     protected $rules = [
-        'name' => 'required',
-        'surname' => 'required',
+        'name' => 'required|string',
+        'surname' => 'required|string',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:8',
         'passwordConfirmation' => 'required|same:password',
@@ -42,13 +42,25 @@ class CreateUser extends Component
 
         $this->validate();
 
-        $address = Address::create([
+        $existingAddress = Address::where('address', $this->address)
+            ->where('city', $this->city)
+            ->where('province', $this->province)
+            ->where('postalcode', $this->postalcode)
+            ->first();
 
-            'address' => $this->address,
-            'city' => $this->city,
-            'province' => $this->province,
-            'postalcode' => $this->postalcode,
-        ]);
+        if (!$existingAddress) {
+            $address = Address::create([
+
+                'address' => $this->address,
+                'city' => $this->city,
+                'province' => $this->province,
+                'postalcode' => $this->postalcode,
+            ]);
+
+        } else {
+
+            $address = $existingAddress;
+        }
 
         try {
             User::create([
@@ -78,8 +90,6 @@ class CreateUser extends Component
     {
         $this->reset();
     }
-
-    //address fields
 
     public function render()
     {

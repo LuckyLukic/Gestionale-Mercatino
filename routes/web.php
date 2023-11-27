@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Data;
+use App\Livewire\User;
 use App\Livewire\Homepage;
 use App\Livewire\CreateUser;
 use Illuminate\Support\Facades\Route;
@@ -17,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", Homepage::class)->name("home");
-Route::get("/create-user", CreateUser::class)->name("create-user");
-Route::get("/data", Data::class)->name("create-user");
+Route::get("/create-user", CreateUser::class);
+Route::get("/data", Data::class);
+Route::get("/user/{userId}", User::class)->name('user.profile');

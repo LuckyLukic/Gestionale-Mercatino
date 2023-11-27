@@ -10,9 +10,16 @@ class Data extends Component
     public $users = [];
 
 
+
     public function delete(User $userId)
     {
         $userId->delete();
+    }
+
+    public function redirectToUser($userId)
+    {
+
+        return redirect()->route('user.profile', [$userId]);
     }
 
     public function render()

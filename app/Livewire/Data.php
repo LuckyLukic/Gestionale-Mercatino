@@ -9,16 +9,17 @@ class Data extends Component
 {
     public $users = [];
 
-    public function mount()
+
+    public function delete(User $userId)
     {
-
-        $this->users = User::all();
-
+        $userId->delete();
     }
 
     public function render()
     {
 
-        return view('livewire.data');
+        return view('livewire.data', [
+            $this->users = User::all()
+        ]);
     }
 }

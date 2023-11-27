@@ -21,7 +21,7 @@
 
                 <a href="" class="w-full"><button type="button" class="w-full bg-lime-500 hover:bg-lime-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">View</button> </a>
                 <a href="" class="w-full"><button type="button" class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Update</button></a>
-                <button type="button" class="w-full bg-red-500 hover:bg-red-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200 ">Remove</button>
+                <button wire:click='delete({{$user->id}})' wire:confirm='are you sure you want to delete this user?' type="button" class="w-full bg-red-500 hover:bg-red-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200 ">Remove</button>
 
             </div>
         </div>

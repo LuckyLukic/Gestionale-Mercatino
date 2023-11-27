@@ -6,6 +6,8 @@
         <script src="https://cdn.tailwindcss.com"></script>
 
         <title>{{ $title ?? 'LarGest' }}</title>
+
+        @livewireStyles
     </head>
     <body>
         <header>
@@ -16,5 +18,7 @@
 
 
         {{ $slot }}
+
+        @livewireScripts
     </body>
 </html>

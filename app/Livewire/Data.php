@@ -31,15 +31,22 @@ class Data extends Component
 
         if ($this->search) {
 
-            $this->users = User::where($this->term, 'LIKE', '%' . $this->search . '%')->get();
+            if ($this->term == 'city') {
+                $this->users = User::whereHas('address', function ($query) {
+                    $query->where('city', 'LIKE', $this->search . '%');
+                })->get();
+            } else {
 
+                $this->users = User::where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->get();
+
+            }
         } else {
             $this->users = User::all();
         }
 
     }
 
-    public function updatedSearch()
+    public function updatedSearch()  // automatically binded to $search
     {
 
         $this->index();
@@ -65,7 +72,7 @@ class Data extends Component
         return redirect()->route('user.update', [$userId]);
     }
 
-    public function render()
+    public function render()  //called whenever a public property in the component changes
     {
         return view('livewire.data', [
             'users' => $this->users

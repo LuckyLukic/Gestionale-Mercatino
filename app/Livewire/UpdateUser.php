@@ -48,8 +48,17 @@ class UpdateUser extends Component
         $this->city = $user->address->city;
         $this->province = $user->address->province;
         $this->postalcode = $user->address->postalcode;
-
     }
+
+    // alternative
+// all the public attribute + $user
+    // public function mount($userId)
+    // {
+    //     $this->user = $user;  take the istance of User with the passed id form url
+    //     $this->id = $user->id;
+    //     $this->name = $user->name;
+    //     .......
+    // }
 
     public function update()
     {
@@ -83,14 +92,16 @@ class UpdateUser extends Component
         }
 
         $user->save();
+        session()->flash('success', 'Customer updated sucessfully!');
         $this->redirect("/user/$this->id", navigate: true);
     }
 
     public function delete()
     {
 
-        User::deleted($this->id);
+        User::find($this->id)->delete();
         $this->redirect("/data", navigate: true);
+        session()->flash('success', 'Customer deleted sucessfully!');
 
     }
 

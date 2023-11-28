@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Data extends Component
 {
-    public $users;
+    public $users = [];
     public $search;
 
     public $term = "surname";
@@ -60,17 +60,18 @@ class Data extends Component
         $this->render();
     }
 
-    public function redirectToUser($userId)
-    {
+    //gestito redirect con href in blade
+    // public function redirectToUser($userId)
+    // {
 
-        return redirect()->route('user.profile', [$userId]);
-    }
+    //     return redirect()->route('user.profile', [$userId]);
+    // }
+    //gestito redirect con href in blade
+    // public function redirectToUpdate($userId)
+    // {
 
-    public function redirectToUpdate($userId)
-    {
-
-        return redirect()->route('user.update', [$userId]);
-    }
+    //     return redirect()->route('user.update', [$userId]);
+    // }
 
     public function render()  //called whenever a public property in the component changes
     {

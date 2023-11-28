@@ -7,6 +7,7 @@ use App\Models\Address;
 use Livewire\Component;
 
 
+
 class CreateUser extends Component
 {
     //User fields
@@ -17,7 +18,7 @@ class CreateUser extends Component
     protected $rules = [
         'name' => 'required|string',
         'surname' => 'required|string',
-        'email' => 'required|email|unique:users,email',
+        'email' => 'required|email|unique:users',  //users plurale because is referred to the table
         'password' => 'required|min:8',
         'passwordConfirmation' => 'required|same:password',
         'address' => 'required',
@@ -72,10 +73,10 @@ class CreateUser extends Component
                 'address_id' => $address->id,
             ]);
 
-            $this->dispatch('userCreated');
-
+            // $this->dispatch('userCreated');
+            session()->flash('success', 'Customer deleted sucessfully!');
         } catch (\Exception $e) {
-            $this->dispatch('userCreationFailed');
+            // $this->dispatch('userCreationFailed');
         }
 
         $this->reset();
@@ -100,6 +101,7 @@ class CreateUser extends Component
 
     public function render()
     {
+
         return view('livewire.create-user');
     }
 }

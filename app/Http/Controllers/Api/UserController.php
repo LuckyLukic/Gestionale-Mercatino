@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\UserRequests;
@@ -31,5 +33,22 @@ class UserController extends Controller
 
     }
 
+    public function update(UpdateUserRequest $request, User $user)
+    {
+
+        $user->update($request->validated());
+
+        return UserResorurce::make($user);
+
+    }
+
+    public function destroy(User $user)
+    {
+
+        $user->delete();
+
+        return response()->noContent();
+
+    }
 
 }

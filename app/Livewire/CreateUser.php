@@ -37,6 +37,7 @@ class CreateUser extends Component
         ];
     }
 
+
     public function create()
     {
 
@@ -78,12 +79,18 @@ class CreateUser extends Component
         }
 
         $this->reset();
+        return redirect('/data');
 
     }
 
-    public function delete(User $userId)
+    public function delete()
     {
-        $userId->delete();
+        $user = User::find($this->id);
+        if ($user) {
+            $user->delete();
+            return redirect('/data');
+        }
+
     }
 
     public function clear()

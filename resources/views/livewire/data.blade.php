@@ -14,7 +14,7 @@
                         d="m1 1 4 4 4-4" />
                 </svg></button>
             <div x-show="isOpen" id="dropdown"
-                class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                class="z-10 bg-white rounded-lg shadow w-44">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
                     <li>
                         <button type="button" wire:click="updateTerm('name')"
@@ -115,7 +115,7 @@
                                 <a wire:navigate href="/user/{{ $user->id }}" class="w-full"><button type="button"
                                         class="w-full bg-lime-500 hover:bg-lime-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">View</button>
                                 </a>
-                                <a wire:navigate href="/user/update/{{ $user->id }}" class="w-full"><button
+                                <a wire:navigate href="/user/{{ $user->id }}/update" class="w-full"><button
                                         type="button"
                                         class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Update</button></a>
                                 <button wire:click='delete({{ $user->id }})'

@@ -52,7 +52,7 @@ class UpdateUser extends Component
 
     // alternative
 // all the public attribute + $user
-    // public function mount($userId)
+    // public function mount(User $user)
     // {
     //     $this->user = $user;  take the istance of User with the passed id form url
     //     $this->id = $user->id;

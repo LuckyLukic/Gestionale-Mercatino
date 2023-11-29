@@ -13,8 +13,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="m1 1 4 4 4-4" />
                 </svg></button>
-            <div x-show="isOpen" id="dropdown"
-                class="z-10 bg-white rounded-lg shadow w-44">
+            <div x-show="isOpen" id="dropdown" class="z-10 bg-white rounded-lg shadow w-44">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
                     <li>
                         <button type="button" wire:click="updateTerm('name')"
@@ -63,7 +62,7 @@
 
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl mx-auto px-8">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-7xl mx-auto px-8 mb-8">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400mb-5">
                 <tr>

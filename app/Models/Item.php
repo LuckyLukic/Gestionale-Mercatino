@@ -14,9 +14,10 @@ class Item extends Model
 
         'name',
         'category',
-        'quanity',
+        'quantity',
         'price',
         'description',
+        'user_id'
 
     ];
 

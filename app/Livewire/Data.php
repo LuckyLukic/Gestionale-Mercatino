@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use App\Models\Address;
 use Livewire\Component;
 
 class Data extends Component
@@ -54,10 +55,20 @@ class Data extends Component
     }
 
 
-    public function delete(User $userId)
+    public function delete(User $user)
     {
-        $userId->delete();
-        $this->render();
+
+        $addressId = $user->address_id;
+
+        $user->address_id = null; // Disassociate the user from the address before deleting the user
+        $user->save();
+
+        $user->delete();
+
+        if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
+
+            Address::where('id', $addressId)->delete();
+        }
     }
 
     //gestito redirect con href in blade
@@ -75,8 +86,6 @@ class Data extends Component
 
     public function render()  //called whenever a public property in the component changes
     {
-        return view('livewire.data', [
-            'users' => $this->users
-        ]);
+        return view('livewire.data');
     }
 }

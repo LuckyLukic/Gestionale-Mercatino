@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->decimal('price', 9, 2);
             $table->string('description');
             $table->timestamps();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
 
         });
     }

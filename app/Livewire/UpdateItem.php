@@ -3,20 +3,28 @@
 namespace App\Livewire;
 
 use App\Models\Item;
-use App\Models\User;
 use Livewire\Component;
 
-class CreateItem extends Component
+class UpdateItem extends Component
 {
+
+
     public $userId;
 
-    public $name, $category, $quantity, $description = "", $price;
+    public $itemId, $name, $category, $quantity, $description, $price;
 
-    public function mount(User $userId) //$userId must match with the paramenter in the route configuration.
+    public function mount(Item $itemId) //$userId must match with the paramenter in the route configuration.
     {
 
-        $this->userId = $userId->id;
-        logger('ID: ', [$this->userId]);
+        $this->userId = $itemId->user_id;
+        $this->itemId = $itemId->id;
+        $this->name = $itemId->name;
+        $this->category = $itemId->category;
+        $this->quantity = $itemId->quantity;
+        $this->description = $itemId->description;
+        $this->price = $itemId->price;
+
+        logger('CATEGORY: ', [$this->category]);
 
     }
 
@@ -39,32 +47,40 @@ class CreateItem extends Component
 
 
 
-    public function createItem()
+    public function updateItem()
     {
         $this->validate();
 
 
-        Item::create([
+        $item = Item::find($this->itemId);
+
+        $item->update([
             'name' => $this->name,
             'category' => strtolower($this->category),
             'quantity' => $this->quantity,
             'price' => $this->price,
             'description' => $this->description,
-            'user_id' => $this->userId
         ]);
 
         session()->flash('success', 'Item added to User');
-        $this->reset();
+
+        return redirect()->route('user.profile', [$this->userId]);
 
     }
 
-    public function clear()
+    public function delete()
     {
-        $this->reset();
+        Item::find($this->itemId)->delete();
+
+        session()->flash('success', 'Item added to User');
+
+        return redirect()->route('user.profile', [$this->userId]);
     }
+
 
     public function render()
     {
-        return view('livewire.create-item');
+
+        return view('livewire.update-item');
     }
 }

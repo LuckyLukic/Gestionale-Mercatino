@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit='createItem'>
+    <form wire:submit='updateItem'>
 
         <div class="space-y-12 max-w-7xl mx-auto px-8">
 
@@ -111,11 +111,11 @@
 
         <div class="mt-6 max-w-7xl mx-auto px-8 flex items-center justify-end gap-x-6">
 
-            <button type="submit" wire:confirm='are you sure you want to create this user?'
-                class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Create
+            <button type="submit" wire:confirm='are you sure you want to update this item?'
+                class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Update
                 Item</button>
-            <button wire:click='clear()' type="button"
-                class="w-full bg-red-500 hover:bg-red-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200 ">Cancel</button>
+            <button wire:click='delete' type="button" wire:confirm='are you sure you want to delete this item?'
+                class="w-full bg-red-500 hover:bg-red-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200 ">Delete</button>
 
         </div>
     </form>

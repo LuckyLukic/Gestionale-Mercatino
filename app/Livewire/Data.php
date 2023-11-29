@@ -59,6 +59,7 @@ class Data extends Component
     {
 
         $addressId = $user->address_id;
+        $items = $user->items;
 
         $user->address_id = null; // Disassociate the user from the address before deleting the user
         $user->save();

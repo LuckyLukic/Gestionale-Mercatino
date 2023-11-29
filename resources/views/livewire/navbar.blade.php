@@ -3,6 +3,7 @@
         <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
+
                 <button type="button"
                     class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     aria-controls="mobile-menu" aria-expanded="false">
@@ -29,30 +30,45 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div class="flex flex-shrink-0 items-center">
-                    <a wire:navigate href="/"> <img class="h-8 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"></a>
-                </div>
-                <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
 
-                        <a href="/create-user" wire:navigate
-                            class="{{ $this->currentRoute === url('/create-user') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Create
-                            User</a>
-                        <a href="/data" wire:navigate
-                            class="{{ $this->currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                @guest
+                    <div class="flex flex-shrink-0 items-center">
+                        <a wire:navigate href="/"> <img class="h-8 w-auto"
+                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                alt="Your Company"></a>
                     </div>
-                </div>
+                @endguest
+                @auth
+
+
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+
+                            <a href="/create-user" wire:navigate
+                                class="{{ $this->currentRoute === url('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Stats
+                            </a>
+
+                            <a href="/create-user" wire:navigate
+                                class="{{ $this->currentRoute === url('/create-user') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Create
+                                User</a>
+                            <a href="/data" wire:navigate
+                                class="{{ $this->currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
+                        </div>
+                    </div>
+                @endauth
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
 
                 @guest
 
-                    <div><a href="/register">Register</a></div>
-                    <div><a href="/login">LogIn</a></div>
+                    <a href="/register" wire:navigate
+                        class="{{ $this->currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Register
+                    </a>
+                    <a href="/login" wire:navigate
+                        class="{{ $this->currentRoute === url('/login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Login
+                    </a>
                 @endguest
 
                 <!-- Profile dropdown -->
@@ -77,14 +93,14 @@
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#"
+                            {{-- <a href="#"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
                                 role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                             <a href="#"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
-                                role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                                role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> --}}
                             <button wire:click='logout'
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
+                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
                         </div>
                     @endauth

@@ -24,15 +24,23 @@ class Login extends Component
 
         $validate = $this->validate();
 
-        if (Auth::attempt($validate)) {
-            $request->session()->regenerate();
+        try {
 
-            return $this->redirect('/', navigate: true);
+            if (Auth::attempt($validate)) {
+                $request->session()->regenerate();
 
+                return $this->redirect('/', navigate: true);
+
+            }
+
+            $this->addError('email', 'Email or Password is not correct!');
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'An error occurred during login: ' . $e->getMessage());
         }
-
-        $this->addError('email', 'Email or Password is not correct!');
     }
+
     public function render()
     {
         return view('livewire.login');

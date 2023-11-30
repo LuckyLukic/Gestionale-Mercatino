@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Enums\CategoryEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,7 @@ class ItemFactory extends Factory
             'quantity' => $this->faker->numberBetween(1, 10),
             'price' => $this->faker->randomFloat(2, 10, 100),
             'description' => $this->faker->text(120),
+            'user_id' => User::factory(),  //associate the id from the associated user
         ];
     }
 }

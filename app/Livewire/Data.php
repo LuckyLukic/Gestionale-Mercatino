@@ -5,21 +5,17 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Address;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Data extends Component
 {
-    public $users = [];
+
+    use WithPagination;
+
     public $search;
 
     public $term = "surname";
 
-
-
-    public function mount()
-    {
-
-        $this->index();
-    }
 
     public function updateTerm($term)
     {
@@ -35,14 +31,14 @@ class Data extends Component
             if ($this->term == 'city') {
                 $this->users = User::whereHas('address', function ($query) {
                     $query->where('city', 'LIKE', $this->search . '%');
-                })->get();
+                })->paginate(10);
             } else {
 
-                $this->users = User::where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->get();
+                return User::where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
 
             }
         } else {
-            $this->users = User::all();
+            return User::paginate(10);
         }
 
     }
@@ -86,6 +82,7 @@ class Data extends Component
 
     public function render()  //called whenever a public property in the component changes
     {
-        return view('livewire.data');
+        $users = $this->index();
+        return view('livewire.data', compact('users'));
     }
 }

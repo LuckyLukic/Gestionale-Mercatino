@@ -28,8 +28,6 @@ class UserFactory extends Factory
     public function definition(): array
     {
 
-        $addressId = Address::inRandomOrder()->value('id');
-
         return [
             'name' => fake()->name(),
             'surname' => fake()->lastName(),
@@ -37,24 +35,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'address_id' => $addressId
-            ,
+            'address_id' => Address::factory(), //assign the id from the associated address
+
+
         ];
     }
 
-
-
-    public function configure()
-    {
-        return $this->afterCreating(function (User $user) {
-            // Create 2 to 5 random items for the user
-            $numItems = rand(2, 5);
-            ItemFactory::new()->count($numItems)->create(['user_id' => $user->id]);
-
-
-
-        });
-    }
 
     /**
      * Indicate that the model's email address should be unverified.

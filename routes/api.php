@@ -17,7 +17,7 @@ use App\Http\Controllers\Api\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) { //Sanctum provides an authentication system for SPA token-based APIs. The auth:sanctum middleware ensures that the route is accessible only to authenticated users.
     return $request->user();
 });
 
@@ -27,3 +27,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // });
 
 Route::apiResource('/users', UserController::class);
+Route::apiResource('/items', UserController::class);
+Route::apiResource('/addresses', UserController::class);

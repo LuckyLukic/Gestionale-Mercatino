@@ -63,7 +63,7 @@
 
 
     <div class="relative overflow-x-auto  sm:rounded-lg mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-8">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 mb-8">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
                 <tr>
                     <th scope="col" class="pe-6 py-3">
@@ -88,7 +88,7 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    @if ($user->role === 'admin' || $user->address->city == null)
+                    @if ($user->role === 'admin')
                         @continue
                     @endif
                     <tr wire:key='{{ $user->id }}' class="bg-white border-b  hover:bg-gray-50 ">
@@ -128,9 +128,7 @@
 
             </tbody>
         </table>
+        {{ $users->links() }}
+
     </div>
-
-
-
-
 </div>

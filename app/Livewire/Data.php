@@ -29,16 +29,16 @@ class Data extends Component
         if ($this->search) {
 
             if ($this->term == 'city') {
-                $this->users = User::whereHas('address', function ($query) {
+                $this->users = User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
                     $query->where('city', 'LIKE', $this->search . '%');
                 })->paginate(10);
             } else {
 
-                return User::where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
+                return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
 
             }
         } else {
-            return User::paginate(10);
+            return User::where('role', '<>', 'admin')->paginate(10);
         }
 
     }

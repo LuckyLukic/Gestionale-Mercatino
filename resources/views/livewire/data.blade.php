@@ -88,9 +88,6 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    @if ($user->role === 'admin')
-                        @continue
-                    @endif
                     <tr wire:key='{{ $user->id }}' class="bg-white border-b  hover:bg-gray-50 ">
                         <th scope="row" class="py-4 font-medium text-gray-900 whitespace-nowrap ">
                             <div> {{ $user->id }}</div>
@@ -102,7 +99,7 @@
                             <div>{{ $user->surname }}</div>
                         </td>
                         <td class="px-6 py-4">
-                            <div> {{ $user->address->city }}</div>
+                            <div> {{ optional($user->address)->city }}</div>
                         </td>
                         <td class="px-6 py-4">
                             <div> {{ $user->email }}</div>

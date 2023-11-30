@@ -113,8 +113,9 @@
 
         <div class="mt-6 max-w-7xl mx-auto px-8 flex items-center justify-end gap-x-6">
 
-            <a href="/user/{{$id}}/create-item/" class="w-full"> <button type="button"
-                class="w-full bg-green-500 hover:bg-green-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Add Item</button></a>
+            <a href="/user/{{ $id }}/create-item/" class="w-full"> <button type="button"
+                    class="w-full bg-green-500 hover:bg-green-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Add
+                    Item</button></a>
 
             <button type="button" wire:click='update()' wire:confirm='are you sure you want to update this user?'
                 class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Update</button>

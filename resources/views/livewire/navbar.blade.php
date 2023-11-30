@@ -42,7 +42,7 @@
                 @auth
 
 
-                    <div class="hidden sm:ml-6 sm:block">
+                    <div class="hidden  sm:block">
                         <div class="flex space-x-4">
 
                             <a href="/create-user" wire:navigate

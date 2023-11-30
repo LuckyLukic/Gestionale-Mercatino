@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\V1;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResorurce extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,7 @@ class UserResorurce extends JsonResource
             'name' => $this->name,
             'surname' => $this->surname,
             'email' => $this->email,
-            'role' => $this->role,
+            'role' => 'user',
             'address' => $this->address,
             'items' => ItemResource::collection($this->items),
         ];

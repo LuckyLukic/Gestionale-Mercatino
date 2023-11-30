@@ -45,7 +45,7 @@ class Register extends Component
             'role' => RoleEnum::ADMIN,
         ]);
 
-        Auth::login($user);
+        Auth::login($user); //to login automatically after the registration success
         session()->flash('success', 'Registration done!');
         return $this->redirect('/', navigate: true);
 

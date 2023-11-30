@@ -2,9 +2,12 @@
 
 
 
+use App\Http\Controllers\Api\V1\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\V1\ItemController;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +20,21 @@ use App\Http\Controllers\Api\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) { //Sanctum provides an authentication system for SPA token-based APIs. The auth:sanctum middleware ensures that the route is accessible only to authenticated users.
-    return $request->user();
+
+
+
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
+
+    Route::middleware('auth:sanctum')->group(function () { //Sanctum provides an authentication system for SPA token-based APIs. The auth:sanctum middleware ensures that the route is accessible only to authenticated users.
+        Route::apiResource('/users', UserController::class);
+        Route::apiResource('/items', ItemController::class);
+        Route::apiResource('/addresses', AddressController::class);
+        Route::post('/logout', [UserController::class, 'logout']);
+    });
+
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/logout', [UserController::class, 'logout']);
 });
 
-// Route::get('/api/data', function () {
-//     $users = User::all(); // Retrieve all users from the database
-//     return response()->json(['users' => $users], 200); // Return users as JSON response
-// });
 
-Route::apiResource('/users', UserController::class);
-Route::apiResource('/items', UserController::class);
-Route::apiResource('/addresses', UserController::class);

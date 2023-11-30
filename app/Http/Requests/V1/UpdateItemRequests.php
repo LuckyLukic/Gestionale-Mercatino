@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
+use App\Http\Requests\V1\StoreItemRequests;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequests extends FormRequest
+class UpdateItemRequests extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,10 @@ class UserRequests extends FormRequest
         return [
 
             'name' => 'required|string',
-            'surname' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8',
+            'category' => 'required',
+            'quantity' => 'required|integer|min:1',
+            'description' => 'required|string|max:255',
+            'price' => 'required|numeric|between:0,9999999.99',
 
         ];
     }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Data;
-use App\Livewire\User;
 use App\Livewire\Login;
 use App\Livewire\Customer;
 use App\Livewire\Homepage;
@@ -34,4 +33,5 @@ Route::middleware('auth')->group(function () {
 
 Route::get("/login", Login::class)->name('login'); //login to be specified because Laravel assumes that login page is named login to automatically redirect users by RedirectIfAuthenticated
 Route::get("/register", Register::class);
+
 

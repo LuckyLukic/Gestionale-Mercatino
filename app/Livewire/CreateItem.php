@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\Item;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Database\QueryException;
+use Illuminate\Validation\ValidationException;
 
 class CreateItem extends Component
 {
@@ -41,19 +43,27 @@ class CreateItem extends Component
 
     public function createItem()
     {
+
         $this->validate();
 
+        try {
 
-        Item::create([
-            'name' => $this->name,
-            'category' => strtolower($this->category),
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'description' => $this->description,
-            'user_id' => $this->userId
-        ]);
+            Item::create([
+                'name' => $this->name,
+                'category' => strtolower($this->category),
+                'quantity' => $this->quantity,
+                'price' => $this->price,
+                'description' => $this->description,
+                'user_id' => $this->userId
+            ]);
 
-        session()->flash('success', 'Item added to User');
+            session()->flash('success', 'Item added to User');
+
+        } catch (ValidationException $e) {
+
+            session()->flash('error', 'Error: ' . $e->getMessage());
+        }
+
         $this->reset();
 
     }

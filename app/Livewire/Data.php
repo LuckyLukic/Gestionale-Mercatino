@@ -25,22 +25,30 @@ class Data extends Component
 
     public function index()
     {
+        try {
 
-        if ($this->search) {
+            if ($this->search) {
 
-            if ($this->term == 'city') {
-                $this->users = User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
-                    $query->where('city', 'LIKE', $this->search . '%');
-                })->paginate(10);
+                if ($this->term == 'city') {
+                    return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
+                        $query->where('city', 'LIKE', $this->search . '%');
+                    })->paginate(10);
+                } else {
+
+                    return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
+
+                }
             } else {
 
-                return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
+                return User::where('role', '<>', 'admin')->paginate(10);
 
             }
-        } else {
-            return User::where('role', '<>', 'admin')->paginate(10);
-        }
 
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error :' . $e->getMessage());
+
+        }
     }
 
     public function updatedSearch()  // automatically binded to $search
@@ -53,17 +61,26 @@ class Data extends Component
 
     public function delete(User $user)
     {
+        try {
 
-        $addressId = $user->address_id;
+            $addressId = $user->address_id;
 
-        $user->address_id = null; // Disassociate the user from the address before deleting the user
-        $user->save();
+            $user->address_id = null; // Disassociate the user from the address before deleting the user
+            $user->save();
 
-        $user->delete();
+            $user->delete();
 
-        if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
+            if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
 
-            Address::where('id', $addressId)->delete();
+                Address::where('id', $addressId)->delete();
+            }
+
+            session()->flash('success', 'User deleted!');
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error :' . $e->getMessage());
+
         }
     }
 

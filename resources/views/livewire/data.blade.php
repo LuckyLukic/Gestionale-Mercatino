@@ -31,11 +31,6 @@
                             @click="isOpen = false">City</button>
                     </li>
                     <li>
-                        <button type="button" wire:click="updateTerm('address')"
-                            class="inline-flex w-full px-4 py-2 hover:bg-gray-100 "
-                            @click="isOpen = false">Address</button>
-                    </li>
-                    <li>
                         <button type="button" wire:click="updateTerm('email')"
                             class="inline-flex w-full px-4 py-2 hover:bg-gray-100 "
                             @click="isOpen = false">Email</button>

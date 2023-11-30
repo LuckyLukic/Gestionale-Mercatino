@@ -62,48 +62,79 @@ class UpdateUser extends Component
 
     public function update()
     {
+
         $this->validate();
 
-        $user = User::find($this->id);
+        try {
 
-        $user->name = $this->name;
-        $user->surname = $this->surname;
-        $user->email = $this->email;
+            $user = User::find($this->id);
 
-        //Check if somethinf different in the addres ue to the many to one relation user/address
-        if (
-            $this->address !== $user->address->address ||
-            $this->city !== $user->address->city ||
-            $this->province !== $user->address->province ||
-            $this->postalcode !== $user->address->postalcode
-        ) {
+            $user->name = $this->name;
+            $user->surname = $this->surname;
+            $user->email = $this->email;
 
+            //Check if somethinf different in the addres ue to the many to one relation user/address
+            if (
+                $this->address !== $user->address->address ||
+                $this->city !== $user->address->city ||
+                $this->province !== $user->address->province ||
+                $this->postalcode !== $user->address->postalcode
+            ) {
 
-            $address = new Address([
-                'address' => $this->address,
-                'city' => $this->city,
-                'province' => $this->province,
-                'postalcode' => $this->postalcode,
-            ]);
+                $address = new Address([
+                    'address' => $this->address,
+                    'city' => $this->city,
+                    'province' => $this->province,
+                    'postalcode' => $this->postalcode,
+                ]);
 
-            $address->save();
+                $address->save();
+                $user->address()->associate($address);
 
-            $user->address()->associate($address);
+            }
+
+            $user->save();
+            session()->flash('success', 'Customer updated sucessfully!');
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error updating customer: ' . $e->getMessage());
+
         }
 
-        $user->save();
-        session()->flash('success', 'Customer updated sucessfully!');
         $this->redirect("/user/$this->id", navigate: true);
     }
 
     public function delete()
     {
+        try {
 
-        User::find($this->id)->delete();
-        $this->redirect("/data", navigate: true);
-        session()->flash('success', 'Customer deleted sucessfully!');
+            $user = User::find($this->id);
+
+            if ($user) {
+
+                $user->delete();
+                session()->flash('success', 'Customer deleted successfully!');
+                return redirect("/data");
+
+            } else {
+
+                session()->flash('error', 'Customer not found');
+
+
+            }
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error deleting customer: ' . $e->getMessage());
+
+            return redirect()->back();
+
+        }
+
 
     }
+
 
     public function render()
     {

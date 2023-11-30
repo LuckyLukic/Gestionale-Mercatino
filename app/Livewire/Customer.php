@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Item;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Customer extends Component
 {
@@ -27,16 +28,25 @@ class Customer extends Component
 
     public function delete($itemId)
     {
-        Item::find($itemId)->delete();
+        try {
 
-        session()->flash('success', 'Item Removed correctly!');
+            $item = Item::find($itemId);
+
+            if ($item) {
+                $item->delete();
+            }
+
+            session()->flash('success', 'Item Removed correctly!');
+
+        } catch (ModelNotFoundException $e) {
+
+            session()->flash('error', 'Error: ' . $e->getMessage());
+
+        }
+
         $this->render();
+
     }
-
-
-
-
-
 
     public function render()
     {

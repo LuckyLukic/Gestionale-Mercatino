@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Item;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UpdateItem extends Component
 {
@@ -49,38 +50,62 @@ class UpdateItem extends Component
 
     public function updateItem()
     {
+
         $this->validate();
 
+        try {
+            $item = Item::find($this->itemId);
 
-        $item = Item::find($this->itemId);
+            $item->update([
+                'name' => $this->name,
+                'category' => strtolower($this->category),
+                'quantity' => $this->quantity,
+                'price' => $this->price,
+                'description' => $this->description,
+            ]);
 
-        $item->update([
-            'name' => $this->name,
-            'category' => strtolower($this->category),
-            'quantity' => $this->quantity,
-            'price' => $this->price,
-            'description' => $this->description,
-        ]);
+            session()->flash('success', 'Item added to User');
 
-        session()->flash('success', 'Item added to User');
+            return redirect()->route('user.profile', [$this->userId]);
 
-        return redirect()->route('user.profile', [$this->userId]);
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error: ' . $e->getMEssage());
+            $this->reset();
+        }
 
     }
 
     public function delete()
     {
-        Item::find($this->itemId)->delete();
+        try {
 
-        session()->flash('success', 'Item added to User');
+            $item = Item::find($this->itemId);
 
-        return redirect()->route('user.profile', [$this->userId]);
+            if ($item) {
+
+                $item->delete();
+                session()->flash('success', 'Item deleted!');
+                $this->reset();
+                return redirect()->route('user.profile', [$this->userId]);
+
+            } else {
+
+                session()->flash('success', 'Item added to User');
+
+            }
+
+        } catch (ModelNotFoundException $e) {
+
+            session()->flash('error', 'Error :' . $e->getMessage());
+
+        }
+
     }
 
 
     public function render()
     {
-
         return view('livewire.update-item');
     }
 }

@@ -37,19 +37,28 @@ class Register extends Component
 
         $this->validate();
 
-        $user = User::create([
-            'name' => $this->name,
-            'surname' => $this->surname,
-            'email' => $this->email,
-            'password' => bcrypt($this->password),
-            'role' => RoleEnum::ADMIN,
-        ]);
+        try {
 
-        Auth::login($user); //to login automatically after the registration success
-        session()->flash('success', 'Registration done!');
-        return $this->redirect('/', navigate: true);
+            $user = User::create([
+                'name' => $this->name,
+                'surname' => $this->surname,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+                'role' => RoleEnum::ADMIN,
+            ]);
+
+            Auth::login($user); //to login automatically after the registration success
+            session()->flash('success', 'Registration done!');
+            return $this->redirect('/', navigate: true);
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error: ' . $e->getMessage());
+
+        }
 
     }
+
     public function render()
     {
         return view('livewire.register');

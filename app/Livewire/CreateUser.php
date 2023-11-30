@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Address;
 use Livewire\Component;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 
@@ -44,27 +46,29 @@ class CreateUser extends Component
 
         $this->validate();
 
-        $existingAddress = Address::where('address', $this->address)
-            ->where('city', $this->city)
-            ->where('province', $this->province)
-            ->where('postalcode', $this->postalcode)
-            ->first();
-
-        if (!$existingAddress) {
-            $address = Address::create([
-
-                'address' => $this->address,
-                'city' => $this->city,
-                'province' => $this->province,
-                'postalcode' => $this->postalcode,
-            ]);
-
-        } else {
-
-            $address = $existingAddress;
-        }
-
         try {
+
+            $existingAddress = Address::where('address', $this->address)
+                ->where('city', $this->city)
+                ->where('province', $this->province)
+                ->where('postalcode', $this->postalcode)
+                ->first();
+
+            if (!$existingAddress) {
+                $address = Address::create([
+
+                    'address' => $this->address,
+                    'city' => $this->city,
+                    'province' => $this->province,
+                    'postalcode' => $this->postalcode,
+                ]);
+
+            } else {
+
+                $address = $existingAddress;
+
+            }
+
             User::create([
                 'name' => $this->name,
                 'surname' => $this->surname,
@@ -73,24 +77,38 @@ class CreateUser extends Component
                 'address_id' => $address->id,
             ]);
 
-            // $this->dispatch('userCreated');
             session()->flash('success', 'Customer deleted sucessfully!');
-        } catch (\Exception $e) {
-            // $this->dispatch('userCreationFailed');
+            $this->reset();
+
+        } catch (ValidationException $e) {
+
+            session()->flash('error', 'Error: ' . $e->getMessage());
+            $this->reset();
+
         }
 
-        $this->reset();
-        return redirect('/data');
+        return $this->redirect('/data', navigate: true);
 
     }
 
     public function delete()
     {
-        $user = User::find($this->id);
-        if ($user) {
-            $user->delete();
-            return redirect('/data');
+
+        try {
+
+            $user = User::find($this->id);
+            if ($user) {
+                $user->delete();
+                session()->flash('success', 'User deleted!.');
+
+            }
+        } catch (ModelNotFoundException $e) {
+
+            session()->flash('error', 'User not found.');
+
         }
+
+        return $this->redirect('/data', navigate: true);
 
     }
 

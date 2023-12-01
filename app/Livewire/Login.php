@@ -21,22 +21,26 @@ class Login extends Component
 
     public function loginUser(Request $request)
     {
-
         $validate = $this->validate();
 
         try {
-
             if (Auth::attempt($validate)) {
                 $request->session()->regenerate();
 
-                return $this->redirect('/', navigate: true);
+                if (Auth::user()->role === 'admin') {
+                    return $this->redirect('/', navigate: true);
 
+                } else {
+                    Auth::logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+                    session()->flash('error', 'Access denied: You are not an admin');
+                    return $this->redirect('/login', navigate: true);
+                }
             }
 
             $this->addError('email', 'Email or Password is not correct!');
-
         } catch (\Exception $e) {
-
             session()->flash('error', 'An error occurred during login: ' . $e->getMessage());
         }
     }

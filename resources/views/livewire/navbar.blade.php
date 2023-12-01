@@ -1,5 +1,5 @@
-<nav class="bg-gray-800 mb-8 ">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+<nav class="bg-gray-800 mb-8 w-full sticky top-0">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
         <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
@@ -54,6 +54,10 @@
                                 User</a>
                             <a href="/data" wire:navigate
                                 class="{{ $this->currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
+                            <a href="/register" wire:navigate
+                                class="{{ $this->currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New
+                                Admin
+                            </a>
                         </div>
                     </div>
                 @endauth
@@ -63,9 +67,7 @@
 
                 @guest
 
-                    <a href="/register" wire:navigate
-                        class="{{ $this->currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Register
-                    </a>
+
                     <a href="/login" wire:navigate
                         class="{{ $this->currentRoute === url('/login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Login
                     </a>
@@ -92,13 +94,7 @@
                         <div x-show="open" @click.away="open=false"
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <!-- Active: "bg-gray-100", Not Active: "" -->
-                            {{-- <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
-                                role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
-                                role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> --}}
+
                             <button wire:click='logout'
                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-800 hover:text-gray-400"
                                 role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>

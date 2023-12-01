@@ -87,9 +87,19 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($login)) {
+
             $user = Auth::user();
-            $token = $user->createToken('laragestoken')->plainTextToken;
-            return response()->json(["token" => $token]);
+
+            if ($user->role === 'admin') {
+
+                $token = $user->createToken('laragestoken')->plainTextToken;
+                return response()->json(["token" => $token]);
+
+            } else {
+
+                return response()->json(["message" => "Access denied: You are not an admin"], 403);
+
+            }
         }
 
         return response()->json(["message" => "login failed"]);

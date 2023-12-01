@@ -77,7 +77,7 @@ class CreateUser extends Component
                 'address_id' => $address->id,
             ]);
 
-            session()->flash('success', 'Customer deleted sucessfully!');
+            session()->flash('success', 'Customer created!');
             $this->reset();
 
         } catch (ValidationException $e) {

@@ -16,6 +16,10 @@ class Data extends Component
 
     public $term = "surname";
 
+    public $userSelection;
+
+    public $adminSelection;
+
 
     public function updateTerm($term)
     {
@@ -23,39 +27,50 @@ class Data extends Component
         $this->term = $term;
     }
 
-    public function index()
-    {
-        try {
+    // public function index()
+    // {
+    //     try {
 
-            if ($this->search) {
+    //         if ($this->search) {
 
-                if ($this->term == 'city') {
-                    return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
-                        $query->where('city', 'LIKE', $this->search . '%');
-                    })->paginate(10);
-                } else {
+    //             if ($this->term == 'city') {
+    //                 return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
+    //                     $query->where('city', 'LIKE', $this->search . '%');
+    //                 })->paginate(10);
+    //             } else {
 
-                    return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
+    //                 return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
 
-                }
-            } else {
+    //             }
+    //         } else {
 
-                return User::where('role', '<>', 'admin')->paginate(10);
+    //             return User::where('role', '<>', 'admin')->paginate(10);
 
-            }
+    //         }
 
-        } catch (\Exception $e) {
+    //     } catch (\Exception $e) {
 
-            session()->flash('error', 'Error :' . $e->getMessage());
+    //         session()->flash('error', 'Error :' . $e->getMessage());
 
-        }
-    }
+    //     }
+    // }
 
     public function updatedSearch()  // automatically binded to $search
     {
 
-        $this->index();
+        $this->index2();
 
+    }
+
+    public function setUserSelection($role)
+    {
+        if ($role === 'user') {
+            $this->userSelection = 'user';
+            $this->adminSelection = null; // Reset admin selection
+        } elseif ($role === 'admin') {
+            $this->adminSelection = 'admin';
+            $this->userSelection = null; // Reset user selection
+        }
     }
 
 
@@ -97,9 +112,50 @@ class Data extends Component
     //     return redirect()->route('user.update', [$userId]);
     // }
 
+    public function index2()
+    {
+        try {
+
+            if ($this->userSelection) {
+                return User::where('role', 'user')->paginate(10);
+            }
+
+            if ($this->adminSelection) {
+                return User::where('role', 'admin')->paginate(10);
+            }
+
+            if ($this->search) {
+
+                if ($this->term == 'city') {
+                    return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
+                        $query->where('city', 'LIKE', $this->search . '%');
+                    })->paginate(10);
+                } else {
+
+                    return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
+
+                }
+            } else {
+
+                return User::paginate(10);
+
+            }
+
+        } catch (\Exception $e) {
+
+            session()->flash('error', 'Error :' . $e->getMessage());
+
+        }
+    }
+
+
+
+
+
+
     public function render()  //called whenever a public property in the component changes
     {
-        $users = $this->index();
+        $users = $this->index2();
         return view('livewire.data', compact('users'));
     }
 }

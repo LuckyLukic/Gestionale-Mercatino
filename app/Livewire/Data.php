@@ -115,31 +115,27 @@ class Data extends Component
     public function index2()
     {
         try {
+            $query = User::query(); // Start with a general query
 
+            // Apply user or admin selection filters
             if ($this->userSelection) {
-                return User::where('role', 'user')->paginate(10);
+                $query->where('role', 'user');
+            } elseif ($this->adminSelection) {
+                $query->where('role', 'admin');
             }
 
-            if ($this->adminSelection) {
-                return User::where('role', 'admin')->paginate(10);
-            }
-
+            // Apply search criteria
             if ($this->search) {
-
                 if ($this->term == 'city') {
-                    return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
-                        $query->where('city', 'LIKE', $this->search . '%');
-                    })->paginate(10);
+                    $query->whereHas('address', function ($query) {
+                        $query->where('city', 'LIKE', '%' . $this->search . '%');
+                    });
                 } else {
-
-                    return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
-
+                    $query->where($this->term, 'LIKE', '%' . $this->search . '%');
                 }
-            } else {
-
-                return User::paginate(10);
-
             }
+
+            return $query->paginate(10);
 
         } catch (\Exception $e) {
 

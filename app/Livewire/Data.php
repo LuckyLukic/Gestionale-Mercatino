@@ -23,66 +23,39 @@ class Data extends Component
 
     public function updateTerm($term)
     {
-
         $this->term = $term;
     }
 
-    // public function index()
-    // {
-    //     try {
 
-    //         if ($this->search) {
-
-    //             if ($this->term == 'city') {
-    //                 return User::where('role', '<>', 'admin')->whereHas('address', function ($query) {
-    //                     $query->where('city', 'LIKE', $this->search . '%');
-    //                 })->paginate(10);
-    //             } else {
-
-    //                 return User::where('role', '<>', 'admin')->where($this->term, 'LIKE', '%' . $this->search . '%')->orderBy($this->term)->paginate(10);
-
-    //             }
-    //         } else {
-
-    //             return User::where('role', '<>', 'admin')->paginate(10);
-
-    //         }
-
-    //     } catch (\Exception $e) {
-
-    //         session()->flash('error', 'Error :' . $e->getMessage());
-
-    //     }
-    // }
 
     public function updatedSearch()  // automatically binded to $search
     {
-
-        $this->index2();
-
+        $this->index();
     }
+
 
     public function setUserSelection($role)
     {
         if ($role === 'user') {
+
             $this->userSelection = 'user';
-            $this->adminSelection = null; // Reset admin selection
+            $this->adminSelection = null;
+
         } elseif ($role === 'admin') {
+
             $this->adminSelection = 'admin';
-            $this->userSelection = null; // Reset user selection
+            $this->userSelection = null;
+
         }
     }
-
 
     public function delete(User $user)
     {
         try {
 
             $addressId = $user->address_id;
-
             $user->address_id = null; // Disassociate the user from the address before deleting the user
             $user->save();
-
             $user->delete();
 
             if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
@@ -112,26 +85,32 @@ class Data extends Component
     //     return redirect()->route('user.update', [$userId]);
     // }
 
-    public function index2()
+    public function index()
     {
         try {
-            $query = User::query(); // Start with a general query
+            $query = User::query();
 
-            // Apply user or admin selection filters
             if ($this->userSelection) {
+
                 $query->where('role', 'user');
+
             } elseif ($this->adminSelection) {
+
                 $query->where('role', 'admin');
+
             }
 
-            // Apply search criteria
             if ($this->search) {
                 if ($this->term == 'city') {
+
                     $query->whereHas('address', function ($query) {
                         $query->where('city', 'LIKE', '%' . $this->search . '%');
+
                     });
                 } else {
+
                     $query->where($this->term, 'LIKE', '%' . $this->search . '%');
+
                 }
             }
 
@@ -145,13 +124,10 @@ class Data extends Component
     }
 
 
-
-
-
-
     public function render()  //called whenever a public property in the component changes
     {
-        $users = $this->index2();
+        $users = $this->index();
         return view('livewire.data', compact('users'));
+
     }
 }

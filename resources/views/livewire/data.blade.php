@@ -1,8 +1,18 @@
 <div>
 
     <livewire:flash>
-
-        <h1 class="text-center mb-8">UTENTI</h1>
+        <!-- component -->
+        <!-- This is an example component -->
+        <div class="w-full mx-auto grid grid-cols-3 mb-8">
+            <div class="col-start-2 grid grid-cols-2 gap-x-4">
+                <button wire:click="setUserSelection('user')"
+                    class=" w-full justify-center text-white bg-orange-700 hover:scale-105 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center transition ease-in-out delay-50 duration-200"
+                    type="button" data-dropdown-toggle="dropdown">Users</button>
+                <button wire:click="setUserSelection('admin')"
+                    class=" w-full justify-center text-white bg-orange-700 hover:scale-105 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center transition ease-in-out delay-50 duration-200"
+                    type="button" data-dropdown-toggle="dropdown">Admins </button>
+            </div>
+        </div>
 
         {{-- <livewire:search-bar> --}}
         <form x-data="{ isOpen: false }" class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 mb-8">

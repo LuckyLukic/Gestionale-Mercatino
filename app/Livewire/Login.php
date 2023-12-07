@@ -6,8 +6,7 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Login extends Component
-{
+class Login extends Component {
 
     public $email;
     public $password;
@@ -19,15 +18,14 @@ class Login extends Component
 
     ];
 
-    public function loginUser(Request $request)
-    {
+    public function loginUser(Request $request) {
         $validate = $this->validate();
 
         try {
-            if (Auth::attempt($validate)) {
+            if(Auth::attempt($validate)) {
                 $request->session()->regenerate();
 
-                if (Auth::user()->role === 'admin') {
+                if(Auth::user()->role === 'admin' || Auth::user()->role === 'superadmin') {
                     return $this->redirect('/', navigate: true);
 
                 } else {
@@ -41,12 +39,11 @@ class Login extends Component
 
             $this->addError('email', 'Email or Password is not correct!');
         } catch (\Exception $e) {
-            session()->flash('error', 'An error occurred during login: ' . $e->getMessage());
+            session()->flash('error', 'An error occurred during login: '.$e->getMessage());
         }
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.login');
     }
 }

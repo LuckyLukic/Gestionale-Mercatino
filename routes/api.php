@@ -30,11 +30,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], f
         Route::apiResource('/items', ItemController::class);
         Route::apiResource('/addresses', AddressController::class);
         Route::post('/logout', [UserController::class, 'logout']);
-        Route::post('/register', [UserController::class, 'register']);
+        Route::post('/register', [UserController::class, 'register'])->middleware('can:create-admin');
     });
 
     Route::post('/login', [UserController::class, 'login']);
-    Route::post('/register', [UserController::class, 'register']);
+
 
 });
 

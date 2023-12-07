@@ -44,10 +44,10 @@ class UpdateUser extends Component
         $this->name = $user->name;
         $this->surname = $user->surname;
         $this->email = $user->email;
-        $this->address = $user->address->address;
-        $this->city = $user->address->city;
-        $this->province = $user->address->province;
-        $this->postalcode = $user->address->postalcode;
+        $this->address = optional($user->address)->address ?? "";
+        $this->city = optional($user->address)->city ?? "";
+        $this->province = optional($user->address)->province ?? "";
+        $this->postalcode = optional($user->address)->postalcode ?? "";
     }
 
     // alternative
@@ -75,10 +75,10 @@ class UpdateUser extends Component
 
             //Check if somethinf different in the addres ue to the many to one relation user/address
             if (
-                $this->address !== $user->address->address ||
-                $this->city !== $user->address->city ||
-                $this->province !== $user->address->province ||
-                $this->postalcode !== $user->address->postalcode
+                $this->address !== optional($user->address)->address ||
+                $this->city !== optional($user->address)->city ||
+                $this->province !== optional($user->address)->province ||
+                $this->postalcode !== optional($user->address)->postalcode
             ) {
 
                 $address = new Address([

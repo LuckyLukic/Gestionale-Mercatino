@@ -29,9 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::get("/user/{userId}/update/", UpdateUser::class)->name('user.update');
     Route::get("/user/{userId}/create-item/", CreateItem::class)->name('user.createItem');
     Route::get("/user/{userId}/update-item/{itemId}", UpdateItem::class)->name('user.updateItem');
+    Route::get("/register", Register::class)->middleware('can:create-admin');
 });
 
 Route::get("/login", Login::class)->name('login'); //login to be specified because Laravel assumes that login page is named login to automatically redirect users by RedirectIfAuthenticated
-Route::get("/register", Register::class);
+
 
 

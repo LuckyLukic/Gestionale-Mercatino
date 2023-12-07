@@ -16,8 +16,8 @@
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Full Address</dt>
                     <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                        {{ $user->address->address }}, {{ $user->address->city }},
-                        {{ $user->address->province }}, {{ $user->address->postalcode }}</dd>
+                        {{ optional($user->address)->address }}, {{ optional($user->address)->city }},
+                        {{ optional($user->address)->province }}, {{ optional($user->address)->postalcode }}</dd>
                 </div>
                 <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                     <dt class="text-sm font-medium leading-6 text-gray-900">Email address</dt>

@@ -28,10 +28,10 @@ class Data extends Component
 
 
 
-    public function updatedSearch()  // automatically binded to $search
-    {
-        $this->index();
-    }
+    // public function updatedSearch()  // automatically binded to $search
+    // {
+    //     $this->index();
+    // }
 
 
     public function setUserSelection($role)

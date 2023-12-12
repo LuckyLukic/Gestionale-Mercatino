@@ -26,8 +26,7 @@
                             <label for="category"
                                 class="block text-sm font-medium leading-6 text-gray-900">Category</label>
                             <div class="mt-2 flex">
-                                <input type="text" x-model="selectedOption"
-                                    @input="$wire.set('category', selectedOption)" {{-- conflict with wire:model, this prevent the conflict and pass selectedOption value to category in the component --}}
+                                <input type="text" x-model="selectedOption" {{-- conflict with wire:model, this prevent the conflict and pass selectedOption value to category in the component --}}
                                     class="block w-full rounded-l-md border-r-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     placeholder="Selected category" name="category" id="category" readonly>
 
@@ -51,16 +50,13 @@
                             <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                 <div class="py-1" role="none" x-show="open" @click.away="open=false">
-                                    <button type="button"
-                                        @click="selectedOption = 'Libro'; $wire.set('category', 'libro'); open = false"
+                                    <button type="button" @click="selectedOption = 'Libro'; open = false"
                                         class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
                                         id="menu-item-0">Libro</button>
-                                    <button type="button"
-                                        @click="selectedOption = 'Gioiello'; $wire.set('category', 'gioiello'); open = false"
+                                    <button type="button" @click="selectedOption = 'Gioiello'; open = false"
                                         class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
                                         id="menu-item-1">Gioiello</button>
-                                    <button type="button"
-                                        @click="selectedOption = 'Altro'; $wire.set('category', 'altro'); open = false"
+                                    <button type="button" @click="selectedOption = 'Altro'; open = false"
                                         class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
                                         id="menu-item-2">Altro</button>
                                 </div>

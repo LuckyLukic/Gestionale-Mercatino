@@ -46,16 +46,16 @@
                         <div class="flex space-x-4">
 
                             <a href="/" wire:navigate
-                                class="{{ $this->currentRoute === url('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Stats
+                                class="{{ $currentRoute === url('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Stats
                             </a>
 
                             <a href="/create-user" wire:navigate
-                                class="{{ $this->currentRoute === url('/create-user') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Create
+                                class="{{ $currentRoute === url('/create-user') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Create
                                 User</a>
                             <a href="/data" wire:navigate
-                                class="{{ $this->currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
+                                class="{{ $currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
                             <a href="/register" wire:navigate
-                                class="{{ $this->currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New
+                                class="{{ $currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New
                                 Admin
                             </a>
                         </div>
@@ -69,7 +69,7 @@
 
 
                     <a href="/login" wire:navigate
-                        class="{{ $this->currentRoute === url('/login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Login
+                        class="{{ $currentRoute === url('/login') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Login
                     </a>
                 @endguest
 

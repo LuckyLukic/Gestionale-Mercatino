@@ -22,7 +22,9 @@ class Customer extends Component
 
         $this->totalItems = $userId->items()->sum('quantity');
 
-        $this->totalAmount = $userId->items;
+        $this->totalAmount = $userId->items->sum(function ($item) {
+            return $item->quantity * $item->price;
+        });
 
     }
 

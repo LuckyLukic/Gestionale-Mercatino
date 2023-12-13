@@ -1,5 +1,7 @@
 <div>
 
+
+
     <livewire:flash>
         <!-- component -->
         <!-- This is an example component -->
@@ -112,10 +114,11 @@
                                     <a wire:navigate href="/user/{{ $user->id }}/update" class="w-full"><button
                                             type="button"
                                             class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Update</button></a>
+                                    {{-- @can('delete', $user) --}}
                                     <button wire:click='delete({{ $user->id }})'
                                         wire:confirm='are you sure you want to delete this user?' type="button"
                                         class="w-full bg-red-500 hover:bg-red-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200 ">Remove</button>
-
+                                    {{-- @endcan --}}
                                 </div>
                             </td>
                         </tr>

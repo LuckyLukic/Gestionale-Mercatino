@@ -73,25 +73,33 @@ class UpdateUser extends Component
             $user->surname = $this->surname;
             $user->email = $this->email;
 
-            //Check if somethinf different in the addres ue to the many to one relation user/address
-            if (
-                $this->address !== optional($user->address)->address ||
-                $this->city !== optional($user->address)->city ||
-                $this->province !== optional($user->address)->province ||
-                $this->postalcode !== optional($user->address)->postalcode
-            ) {
 
-                $address = new Address([
+            $existingAddress = Address::where([
+                'address' => $this->address,
+                'city' => $this->city,
+                'province' => $this->province,
+                'postalcode' => $this->postalcode,
+            ])->first();
+
+            if (!$existingAddress) {
+
+                $address = Address::create([
+
                     'address' => $this->address,
                     'city' => $this->city,
                     'province' => $this->province,
                     'postalcode' => $this->postalcode,
                 ]);
 
-                $address->save();
-                $user->address()->associate($address);
+            } else {
+
+                $address = $existingAddress;
 
             }
+
+
+            $address->save();
+            $user->address()->associate($address); // alternative method not to use the foreign key.
 
             $user->save();
             session()->flash('success', 'Customer updated sucessfully!');

@@ -28,10 +28,10 @@ class Data extends Component
 
 
 
-    public function updatedSearch()  // automatically binded to $search
-    {
-        $this->index();
-    }
+    // public function updatedSearch()  // automatically binded to $search
+    // {
+    //     $this->index();
+    // }
 
 
     public function setUserSelection($role)
@@ -51,23 +51,29 @@ class Data extends Component
 
     public function delete(User $user)
     {
-        try {
+        if (auth()->user()->can('delete', $user)) {
+            try {
 
-            $addressId = $user->address_id;
-            $user->address_id = null; // Disassociate the user from the address before deleting the user
-            $user->save();
-            $user->delete();
+                $addressId = $user->address_id;
+                $user->address_id = null; // Disassociate the user from the address before deleting the user
+                $user->save();
+                $user->delete();
 
-            if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
+                if ($addressId && User::where('address_id', $addressId)->doesntExist()) {  // Check if any other users are associated with this address
 
-                Address::where('id', $addressId)->delete();
+                    Address::where('id', $addressId)->delete();
+                }
+
+                session()->flash('success', 'User deleted!');
+
+            } catch (\Exception $e) {
+
+                session()->flash('error', 'Error :' . $e->getMessage());
+
             }
+        } else {
 
-            session()->flash('success', 'User deleted!');
-
-        } catch (\Exception $e) {
-
-            session()->flash('error', 'Error :' . $e->getMessage());
+            session()->flash('error', 'You do not have authorization to perform this action');
 
         }
     }

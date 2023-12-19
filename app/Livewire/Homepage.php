@@ -31,7 +31,7 @@ class Homepage extends Component
         $this->totalItemsValue = Item::sum(DB::raw('quantity * price'));
 
         if ($this->totalUsers > 0) {
-            $this->averageItemsPerClient = round($this->totalItems / $this->totalUsers);
+            $this->averageItemsPerClient = round($this->totalItems / $this->totalUsers, 2);
         } else {
             $this->averageItemsPerClient = 0;
         }
@@ -41,7 +41,7 @@ class Homepage extends Component
             ->orderBy('item_count', 'desc')
             ->first();
 
-        $this->potentialEarning = $this->totalItemsValue > 0 ? $this->totalItemsValue * 0.30 : 0;
+        $this->potentialEarning = $this->totalItemsValue > 0 ? round($this->totalItemsValue * 0.30, 2) : 0;
 
     }
 

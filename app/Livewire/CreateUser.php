@@ -80,6 +80,8 @@ class CreateUser extends Component
             session()->flash('success', 'Customer created!');
             $this->reset();
 
+
+
         } catch (ValidationException $e) {
 
             session()->flash('error', 'Error: ' . $e->getMessage());

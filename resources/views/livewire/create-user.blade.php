@@ -1,24 +1,5 @@
 <div>
-{{--
-    <div x-data="{ showSuccess: false, showError: false }"
-    x-init=" $nextTick(() =>
-    window.livewire.on('userCreated', () => { showSuccess = true;
-        setTimeout(() => showSuccess = false, 3000); });
-    window.livewire.on('userCreationFailed', () => { showError = true;
-        setTimeout(() => showError = false, 3000); })">
 
-        <div x-show="showSuccess" class="alert alert-success"
-            style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-            User successfully created.
-        </div>
-
-
-        <div x-show="showError" class="alert alert-danger"
-            style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
-            Failed to create user.
-        </div>
-
-    </div> --}}
 
     <form wire:submit='create'>
 
@@ -36,7 +17,7 @@
                             <input wire:model='name' type="text" name="name" id="name"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('name')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
                         </div>
                     </div>
@@ -49,7 +30,7 @@
                             <input wire:model='surname' type="text" name="surname" id="surname"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('surname')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
                         </div>
                     </div>
@@ -61,7 +42,7 @@
                             <input wire:model='email' id="email" name="email" type="email"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('email')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
                         </div>
                     </div>
@@ -72,7 +53,7 @@
                             <input wire:model='password' type="password" name="password" id="password"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('password')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
                         </div>
                     </div>
@@ -85,7 +66,7 @@
                                 id="passwordConfirmation"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('passwordConfirmation')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
 
                         </div>
@@ -98,7 +79,7 @@
                             <input wire:model='address' type="text" name="address" id="address"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('address')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
 
                         </div>
@@ -107,11 +88,12 @@
                     <div class="sm:col-span-2 sm:col-start-1">
                         <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                         <div class="mt-2">
-                            <input wire:model='city' type="text" name="city" id="city" autocomplete="address-level2"
+                            <input wire:model='city' type="text" name="city" id="city"
+                                autocomplete="address-level2"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 
                             @error('city')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
                         </div>
                     </div>
@@ -123,7 +105,7 @@
                             <input wire:model='province' type="text" name="province" id="province"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('province')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
 
                         </div>
@@ -136,7 +118,7 @@
                             <input wire:model='postalcode' type="text" name="postalcode" id="postalcode"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             @error('zipcode')
-                            <em>{{ $message }}</em>
+                                <em>{{ $message }}</em>
                             @enderror
 
                         </div>

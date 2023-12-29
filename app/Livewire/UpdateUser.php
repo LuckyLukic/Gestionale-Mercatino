@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class UpdateUser extends Component
 {
-    public $id;
+    public $userId;
     public $name;
     public $surname;
     public $email;
@@ -40,7 +40,7 @@ class UpdateUser extends Component
 
         $user = User::find($userId);
 
-        $this->id = $user->id;
+        $this->userId = $userId;
         $this->name = $user->name;
         $this->surname = $user->surname;
         $this->email = $user->email;

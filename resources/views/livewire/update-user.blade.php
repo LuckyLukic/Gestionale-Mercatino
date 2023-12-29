@@ -12,7 +12,7 @@
                     <div class="sm:col-span-3">
                         <label for="id" class="block text-sm font-medium leading-6 text-gray-900">ID</label>
                         <div class="mt-2">
-                            <input wire:model='id' type="text" name="id" id="id" readonly
+                            <input wire:model='userId' type="text" name="id" id="id" readonly
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
@@ -113,7 +113,7 @@
 
         <div class="mt-6 max-w-7xl mx-auto px-8 flex items-center justify-end gap-x-6">
 
-            <a href="/user/{{ $id }}/create-item/" class="w-full"> <button type="button"
+            <a href="/user/{{ $userId }}/create-item/" class="w-full"> <button type="button"
                     class="w-full bg-green-500 hover:bg-green-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Add
                     Item</button></a>
 

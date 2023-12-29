@@ -47,5 +47,5 @@
 
         </div>
     </div>
-    <livewire:flash>
+    {{-- <livewire:flash> --}}
 </div>

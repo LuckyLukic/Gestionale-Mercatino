@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
 
-        <title>{{ $title ?? 'LarGest' }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        @livewireStyles
-    </head>
-    <body>
-        <header>
+    <title>{{ $title ?? 'LarGest' }}</title>
 
-            <livewire:navbar>
+    @livewireStyles
+</head>
 
-        </header>
+<body>
+    <header>
 
+        <livewire:navbar>
+
+    </header>
+
+    <livewire:flash>
 
         {{ $slot }}
 
         @livewireScripts
-    </body>
+</body>
+
 </html>

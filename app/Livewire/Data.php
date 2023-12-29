@@ -28,10 +28,7 @@ class Data extends Component
 
 
 
-    // public function updatedSearch()  // automatically binded to $search
-    // {
-    //     $this->index();
-    // }
+
 
 
     public function setUserSelection($role)
@@ -64,11 +61,11 @@ class Data extends Component
                     Address::where('id', $addressId)->delete();
                 }
 
-                session()->flash('success', 'User deleted!');
+                $this->dispatch('success', $message = ['message' => 'User deleted!']);
 
             } catch (\Exception $e) {
 
-                session()->flash('error', 'Error :' . $e->getMessage());
+                $this->dispatch('error', 'Error :' . $e->getMessage());
 
             }
         } else {

@@ -86,8 +86,9 @@ class UpdateItem extends Component
 
                 $item->delete();
                 session()->flash('success', 'Item deleted!');
-                $this->reset();
+
                 return redirect()->route('user.profile', [$this->userId]);
+
 
             } else {
 

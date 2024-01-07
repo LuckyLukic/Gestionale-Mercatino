@@ -61,7 +61,7 @@ class Data extends Component
                     Address::where('id', $addressId)->delete();
                 }
 
-                $this->dispatch('success', $message = ['message' => 'User deleted!']);
+                $this->dispatch('flash-message', type: 'success', message: 'user deleted sucessfully!');
 
             } catch (\Exception $e) {
 

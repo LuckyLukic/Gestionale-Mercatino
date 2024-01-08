@@ -110,7 +110,7 @@
 
         <div class="mt-6 max-w-7xl mx-auto px-8 flex items-center justify-end gap-x-6">
 
-            <button type="submit" wire:confirm='are you sure you want to create this user?'
+            <button type="submit" wire:confirm='are you sure you want to create this item?'
                 class="w-full bg-sky-500 hover:bg-sky-700 hover:scale-105 text-zinc-200 rounded px-2 py-1 transition ease-in-out delay-50 duration-200">Create
                 Item</button>
             <button wire:click='clear()' type="button"

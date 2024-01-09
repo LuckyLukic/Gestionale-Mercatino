@@ -69,7 +69,7 @@ class UpdateUser extends Component
 
         try {
 
-            $user = User::find($this->id);
+            $user = User::find($this->userId);
 
             $user->name = $this->name;
             $user->surname = $this->surname;
@@ -112,14 +112,14 @@ class UpdateUser extends Component
 
         }
 
-        $this->redirect("/user/$this->id", navigate: true);
+        $this->redirect("/user/$this->userId", navigate: true);
     }
 
     public function delete()
     {
         try {
 
-            $user = User::find($this->id);
+            $user = User::find($this->userId);
 
             if ($user) {
 

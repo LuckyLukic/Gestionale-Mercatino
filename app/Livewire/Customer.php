@@ -33,22 +33,23 @@ class Customer extends Component
     public function delete($itemId)
     {
         try {
-
             $item = Item::find($itemId);
 
             if ($item) {
                 $item->delete();
+
+                // Recalculate totalItems and totalAmount
+                $this->totalItems = $this->user->items()->sum('quantity');
+                $this->totalAmount = $this->user->items->sum(function ($item) {
+                    return $item->quantity * $item->price;
+                });
+
+                session()->flash('success', 'Item Removed correctly!');
             }
 
-            session()->flash('success', 'Item Removed correctly!');
-
         } catch (ModelNotFoundException $e) {
-
             session()->flash('error', 'Error: ' . $e->getMessage());
-
         }
-
-        $this->render();
 
     }
 

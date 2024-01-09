@@ -7,6 +7,7 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
+#[Title('General-stats')]
 class Homepage extends Component
 {
 

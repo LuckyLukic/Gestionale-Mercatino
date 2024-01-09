@@ -5,11 +5,13 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Address;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 
+#[Title('create-user')]
 class CreateUser extends Component
 {
     //User fields

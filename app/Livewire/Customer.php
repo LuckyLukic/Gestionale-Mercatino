@@ -5,8 +5,10 @@ namespace App\Livewire;
 use App\Models\Item;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+#[Title('Customer-detail')]
 class Customer extends Component
 {
 

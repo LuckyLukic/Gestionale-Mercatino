@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Address;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Title;
 
+#[Title('Customers')]
 class Data extends Component
 {
 

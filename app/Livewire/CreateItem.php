@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\Item;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 
+#[Title('create-item')]
 class CreateItem extends Component
 {
     public $userId;

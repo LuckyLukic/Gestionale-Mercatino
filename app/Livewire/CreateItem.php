@@ -63,9 +63,10 @@ class CreateItem extends Component
 
             session()->flash('error', 'Error: ' . $e->getMessage());
         }
-        $tempUserId = $this->userId;
-        $this->reset(); // Resets all properties
-        $this->userId = $tempUserId;
+        // $tempUserId = $this->userId;
+        // $this->reset();
+        // $this->userId = $tempUserId;
+        $this->redirect("/user/$this->userId/create-item", navigate: true);
     }
 
     public function clear()

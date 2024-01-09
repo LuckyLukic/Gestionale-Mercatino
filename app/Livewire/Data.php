@@ -61,11 +61,13 @@ class Data extends Component
                     Address::where('id', $addressId)->delete();
                 }
 
-                $this->dispatch('flash-message', type: 'success', message: 'user deleted sucessfully!');
+                //$this->dispatch('flash-message', type: 'success', message: 'user deleted sucessfully!');
+                session()->flash('success', 'User sucessfullty removed');
 
             } catch (\Exception $e) {
 
-                $this->dispatch('error', 'Error :' . $e->getMessage());
+                session()->flash('error', 'something went wrong!');
+                //$this->dispatch('error', 'Error :' . $e->getMessage());
 
             }
         } else {
@@ -73,6 +75,8 @@ class Data extends Component
             session()->flash('error', 'You do not have authorization to perform this action');
 
         }
+
+        $this->redirect('/data', navigate: true);
     }
 
     //gestito redirect con href in blade

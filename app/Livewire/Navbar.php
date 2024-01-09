@@ -23,7 +23,7 @@ class Navbar extends Component
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken(); //regenerate a new CSRF token to invalidate the old token.
-        return $this->redirect('/login', navigate: true);
+        $this->redirect('/login', navigate: true);
 
     }
     public function render()

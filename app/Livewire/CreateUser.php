@@ -89,7 +89,7 @@ class CreateUser extends Component
 
         }
 
-        return $this->redirect('/data', navigate: true);
+        $this->redirect('/data', navigate: true);
 
     }
 

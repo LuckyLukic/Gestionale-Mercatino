@@ -87,13 +87,6 @@ class UpdateItem extends Component
                 $item->delete();
                 session()->flash('success', 'Item deleted!');
 
-                return redirect()->route('user.profile', [$this->userId]);
-
-
-            } else {
-
-                session()->flash('success', 'Item added to User');
-
             }
 
         } catch (ModelNotFoundException $e) {
@@ -101,6 +94,8 @@ class UpdateItem extends Component
             session()->flash('error', 'Error :' . $e->getMessage());
 
         }
+
+        $this->redirectRoute('user.profile', [$this->userId]);
 
     }
 

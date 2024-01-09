@@ -49,7 +49,7 @@ class Register extends Component
 
             Auth::login($user); //to login automatically after the registration success
             session()->flash('success', 'Registration done!');
-            return $this->redirect('/', navigate: true);
+            $this->redirect('/', navigate: true);
 
         } catch (\Exception $e) {
 

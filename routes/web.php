@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Data;
 use App\Livewire\Login;
 use App\Livewire\Customer;
+use App\Livewire\Database;
 use App\Livewire\Homepage;
 use App\Livewire\Register;
 use App\Livewire\CreateItem;
@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get("/", Homepage::class)->name("home");
     Route::get("/create-user", CreateUser::class);
-    Route::get("/data", Data::class);
+    Route::get("/database", Database::class);
     Route::get("/user/{userId}", Customer::class)->name('user.profile');
     Route::get("/user/{userId}/update/", UpdateUser::class)->name('user.update');
     Route::get("/user/{userId}/create-item/", CreateItem::class)->name('user.createItem');

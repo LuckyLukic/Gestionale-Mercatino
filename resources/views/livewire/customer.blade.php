@@ -1,6 +1,6 @@
 <div class="space-y-12 max-w-7xl mx-auto px-8">
 
-    {{-- <livewire:flash> --}}
+
 
     <div class="px-4 sm:px-0">
         <h3 class="text-base font-semibold leading-7 text-gray-900">Customer Information </h3>

@@ -52,8 +52,8 @@
                             <a href="/create-user" wire:navigate
                                 class="{{ $currentRoute === url('/create-user') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Create
                                 User</a>
-                            <a href="/data" wire:navigate
-                                class="{{ $currentRoute === url('/data') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
+                            <a href="/database" wire:navigate
+                                class="{{ $currentRoute === url('/database') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Database</a>
                             <a href="/register" wire:navigate
                                 class="{{ $currentRoute === url('/register') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">New
                                 Admin

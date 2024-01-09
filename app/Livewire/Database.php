@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 
 #[Title('Customers')]
-class Data extends Component
+class Database extends Component
 {
 
     use WithPagination;
@@ -21,6 +21,8 @@ class Data extends Component
     public $userSelection;
 
     public $adminSelection;
+
+    public $show = false;
 
 
     public function updateTerm($term)
@@ -74,11 +76,11 @@ class Data extends Component
             }
         } else {
 
-            session()->flash('error', 'You do not have authorization to perform this action');
-
+            session()->flash('denied', 'You do not have authorization to perform this action');
+            $this->show = true;
         }
 
-        $this->redirect('/data', navigate: true);
+
     }
 
     //gestito redirect con href in blade
@@ -136,7 +138,7 @@ class Data extends Component
     public function render()  //called whenever a public property in the component changes
     {
         $users = $this->index();
-        return view('livewire.data', compact('users'));
+        return view('livewire.database', compact('users'));
 
     }
 }

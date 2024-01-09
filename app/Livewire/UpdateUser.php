@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Address;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
+#[Title('Update User')]
 class UpdateUser extends Component
 {
     public $userId;

@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Enums\RoleEnum;
 use App\Models\User;
+use App\Enums\RoleEnum;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 
+#[Title('Register User')]
 class Register extends Component
 {
 

@@ -5,9 +5,10 @@ namespace App\Livewire;
 use App\Models\Item;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\DB;
 
-#[Title('General-stats')]
+#[Title('General Stats')]
 class Homepage extends Component
 {
 

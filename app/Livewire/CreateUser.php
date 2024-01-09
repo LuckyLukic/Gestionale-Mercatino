@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 
-#[Title('create-user')]
+#[Title('Create User')]
 class CreateUser extends Component
 {
     //User fields

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>{{ $title ?? 'LarGest' }}</title>
+    <title>{{ "$title | LaraGest" ?? 'LaraGest' }}</title>
 
     @livewireStyles
 </head>
@@ -17,12 +17,14 @@
         <livewire:navbar>
 
     </header>
+    <div class="my-6">
+        <livewire:flash>
+    </div>
 
-    <livewire:flash>
 
-        {{ $slot }}
+    {{ $slot }}
 
-        @livewireScripts
+    @livewireScripts
 </body>
 
 </html>

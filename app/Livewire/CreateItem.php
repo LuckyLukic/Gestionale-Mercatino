@@ -9,7 +9,7 @@ use Livewire\Attributes\Title;
 use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 
-#[Title('create-item')]
+#[Title('Create Item')]
 class CreateItem extends Component
 {
     public $userId;

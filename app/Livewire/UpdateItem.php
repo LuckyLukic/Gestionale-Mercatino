@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use App\Models\Item;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+#[Title('Update Item')]
 class UpdateItem extends Component
 {
 
